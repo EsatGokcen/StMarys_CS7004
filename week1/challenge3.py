@@ -24,14 +24,14 @@ def main():
     engine.add_rule(r'\bhello\b', 'Hi there!')
     engine.add_rule(r'\bthank you\b', "You are welcome")
     engine.add_rule(r'\bgoodbye\b|\bbye\b', "Goodbye!")
-    engine.add_rule(r'\bmy name is (.+?)\b', "Nice to meet you, {0}!")
+    engine.add_rule(r'\bmy name is (.+?)\b', r'Nice to meet you!') # , {0} - did not work...
 
     while True:
         user_input = input("You: ")
         response = engine.apply_rules(user_input)
         print(response)
 
-        if user_input.lower() == "goodbye":
+        if user_input.lower() == "goodbye" or "bye":
             break
 
 if __name__ == '__main__':
