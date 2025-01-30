@@ -20,8 +20,8 @@ class RuleEngine():
 def main():
     engine = RuleEngine()
     engine.add_rule(lambda x: x < 12570, "0% tax")
-    engine.add_rule(lambda x: x > 12570 and x < 50270, "20% tax")
-    engine.add_rule(lambda x: x > 50270 and x < 125140, "40% tax")
+    engine.add_rule(lambda x: 12570 < x < 50270, "20% tax")
+    engine.add_rule(lambda x: 50270 < x < 125140, "40% tax")
     engine.add_rule(lambda x: x < 125140, "45% tax")
 
     answer = int(input("What is your annual income? "))
