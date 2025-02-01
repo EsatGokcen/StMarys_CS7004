@@ -31,7 +31,11 @@ def main():
         response = engine.apply_rules(user_input)
         print(response)
 
-        if user_input.lower() == "goodbye" or "bye":
+        if user_input.lower() == "goodbye":
+            break
+        if user_input.lower() == "bye":
+            break
+        if user_input == "q":
             break
 
 if __name__ == '__main__':
