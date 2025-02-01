@@ -21,10 +21,11 @@ class RuleEngine():
 def main():
     engine = RuleEngine()
 
+    # Basic rules that cover most simple conversations
     engine.add_rule(r'\bhello\b', 'Hi there!')
     engine.add_rule(r'\bthank you\b', "You are welcome")
     engine.add_rule(r'\bgoodbye\b|\bbye\b', "Goodbye!")
-    engine.add_rule(r'\bmy name is (.+?)\b', r'Nice to meet you!') # , {0} - did not work...
+    engine.add_rule(r'\bmy name is (.+?)\b', f'Nice to meet you!\nMy name is AGi.') # , {0} - did not work...
 
     # Add travel-related rules with different regex commands
     engine.add_rule(r"\bhello\b",
