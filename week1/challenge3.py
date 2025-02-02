@@ -22,10 +22,13 @@ def main():
     engine = RuleEngine()
 
     # Basic rules that cover most simple conversations
-    engine.add_rule(r'\bhello\b', 'Hi there!')
+    engine.add_rule(r'\bhello\b|\bhi\b|\bhey\b', 'Hi there!')
     engine.add_rule(r'\bthank you\b', "You are welcome")
+    engine.add_rule(r'\bdumb\b|\bstupid\b', "No u")
+    engine.add_rule(r'\bagi\b', "You're supposed to spell my name like this: AGi")
+    engine.add_rule(r'\bfuck\b|\bfuckin\b', "Shut the fuck up bitch")
     engine.add_rule(r'\bgoodbye\b|\bbye\b', "Goodbye!")
-    engine.add_rule(r'\bmy name is (.+?)\b', f'Nice to meet you!\nMy name is AGi.') # , {0} - did not work...
+    engine.add_rule(r'\bmy name is (.+?)\b|\bim\b|\bi am\b', f'Nice to meet you!\nMy name is AGi.') # , {0} - did not work...
 
     # Add travel-related rules with different regex commands
     engine.add_rule(r"\bhello\b",
