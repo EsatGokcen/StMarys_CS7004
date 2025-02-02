@@ -57,8 +57,6 @@ def main():
             break
         if "bye" in user_input.lower():
             break
-        if "q" in user_input.lower():
-            break
 
 if __name__ == '__main__':
     main()
