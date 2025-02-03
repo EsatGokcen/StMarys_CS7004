@@ -13,16 +13,25 @@ class WeatherExpertSystem:
         self.__rules.append((conditions,result))
 
     def infer(self):
-        for conditions, result in self.__rules:
-            if all(condition in self.__facts for condition in conditions):
-                return result
-            return "Default"
+        for rule in self.__rules:
+            for conditions, result in rule:
+                if all(condition in self.__facts for condition in conditions):
+                    return result
+                return "Default"
 
 def main():
     expert_system = WeatherExpertSystem()
-    expert_system.add_fact("high_temperature")  # Example: High temperature
-    expert_system.add_fact("low_humidity")  # Example: Low humidity
+
+    n_facts = int(input("How many facts would you like to enter?: "))
+
+    for count in range(n_facts):
+        user_fact = input("Enter fact: ")
+        expert_system.add_fact(user_fact)
+
     expert_system.add_rule(["high_temperature", "low_humidity"], "Comfortable")
+    expert_system.add_rule(["low_temperature", "high_humidity"], "Uncomfortable")
+    expert_system.add_rule(["high_temperature", "high_wind"], "Comfortable")
+    expert_system.add_rule(["low_temperature", "high_wind"], "Uncomfortable")
 
     result = expert_system.infer()
     print(result)
