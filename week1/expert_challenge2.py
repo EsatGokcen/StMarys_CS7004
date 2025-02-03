@@ -13,3 +13,12 @@ class TechSupportExpertSystem:
 
     def add_rule(self, conditions, solution):
         self.rules.append({"conditions": conditions, "solution": solution})
+
+    def troubleshoot(self):
+        for rule in self.rules:
+            conditions_met = all(self.user_reports[condition] for condition in rule["conditions"])
+
+            if conditions_met:
+                return f"Suggested solution: {rule['solution']}"
+
+        return "No specific solution found for the reported issue."
