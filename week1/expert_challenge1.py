@@ -6,8 +6,8 @@ class WeatherExpertSystem:
         self.__facts = set()
         self.__rules = []
 
-    def add_fact(self):
-        pass
+    def add_fact(self, fact):
+        self.__facts.add(fact)
 
-    def add_rule(self):
-        pass
+    def add_rule(self, conditions, result):
+        self.__rules.append((conditions,result))
