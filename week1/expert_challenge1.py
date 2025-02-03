@@ -11,3 +11,9 @@ class WeatherExpertSystem:
 
     def add_rule(self, conditions, result):
         self.__rules.append((conditions,result))
+
+    def infer(self):
+        for conditions, result in self.__rules:
+            if all(condition in self.__facts for condition in conditions):
+                return result
+            return "Default"
