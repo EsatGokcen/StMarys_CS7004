@@ -26,3 +26,21 @@ class LoanEligibilitySystem:
                     return f"The individual is eligible for a {goal} loan."
 
         return f"The individual is not eligible for a {goal} loan based on their financial situation."
+
+def main():
+
+    loan_system = LoanEligibilitySystem()
+
+    # Add facts for individual's income and credit score
+    loan_system.add_fact("income", 60000)
+    loan_system.add_fact("credit_score", 700)
+
+    # Define rules for loan eligibility
+    loan_system.add_rule("Mortgage", {"income": 50000, "credit_score": 650})
+    loan_system.add_rule("Personal", {"income": 30000, "credit_score": 600})
+
+    # Check mortgage loan eligibility
+    print(loan_system.check_loan_eligibility("Mortgage"))
+
+if __name__ =='__main__':
+    main()
