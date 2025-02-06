@@ -66,8 +66,12 @@ class TemperatureFuzzySystem:
             "cool"
         }
         # Use a loop for cleaner code
-        consequents["heat"] = antecedents["very cold"] + antecedents["cold"]
+        consequents["heat"] = (antecedents["very cold"] + antecedents["cold"])
         consequents["no change"] = antecedents["warm"]
-        consequents["cool"] = antecedents["hot"] + antecedents["very hot"]
+        consequents["cool"] = (antecedents["hot"] + antecedents["very hot"])
 
         return consequents
+
+    def defuzzify(self, consequents):
+        sorted_consequents = sorted(consequents.items(), key=lambda item: item[1])
+        #return  the biggest value in sorted_consequents.keys()
