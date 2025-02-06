@@ -43,3 +43,12 @@ class TemperatureFuzzySystem:
         plt.legend(["Very Cold", "Cold", "Warm", "Hot", "Very Hot"])
         plt.legend()
         plt.show()
+
+    def fuzzify(self, current_temp):
+        return {
+            "very cold" : self.__memberships["very cold"](current_temp),
+            "cold" : self.__memberships["cold"](current_temp),
+            "warm" : self.__memberships["warm"](current_temp),
+            "hot" : self.__memberships["hot"](current_temp),
+            "very hot" : self.__memberships["very hot"](current_temp)
+        }
