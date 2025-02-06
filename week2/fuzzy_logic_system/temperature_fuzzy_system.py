@@ -12,6 +12,12 @@ class TemperatureFuzzySystem:
             "very hot" : lambda temp: max(0, 1 - abs((temp - 40) / 10))
         }
 
+        self.__rules = {
+            ("very cold", "cold") : "heat",
+            "warm" : "no change",
+            ("hot", "very hot") : "cool"
+        }
+
     def plot_membership_functions(self, temp_range: tuple[int, int] = (0,50)):
         lower_bound = temp_range[0]
         upper_bound = temp_range[1]
@@ -52,3 +58,16 @@ class TemperatureFuzzySystem:
             "hot" : self.__memberships["hot"](current_temp),
             "very hot" : self.__memberships["very hot"](current_temp)
         }
+
+    def infer(self, antecedents): # antecedents is basically the dictionary in fuzzify()
+        consequents = {
+            "heat",
+            "no change",
+            "cool"
+        }
+        # Use a loop for cleaner code
+        consequents["heat"] = antecedents["very cold"] + antecedents["cold"]
+        consequents["no change"] = antecedents["warm"]
+        consequents["cool"] = antecedents["hot"] + antecedents["very hot"]
+
+        return consequents
