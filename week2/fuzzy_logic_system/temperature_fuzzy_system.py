@@ -1,4 +1,6 @@
-#import matplotlib.pyplot - need to pip install
+import matplotlib.pyplot
+import matplotlib.pyplot as plt
+
 
 class TemperatureFuzzySystem:
 
@@ -11,5 +13,12 @@ class TemperatureFuzzySystem:
             "very hot" : lambda temp: max(30, 1 - abs((temp - 40) / 10))
         }
 
-    def plot_membership_functions(self, temp_range: tuple[int] = (0,50)):
-        pass
+    def plot_membership_functions(self, temp_range: tuple[int, int] = (0,50)):
+        x = temp_range[0]
+        y = temp_range[1]
+
+        plt.plot(x, y)
+        plt.title("Membership Functions for Linguistic Terms")
+        plt.xlabel("Temperature")
+        plt.ylabel("Membership Degree")
+        plt.legend("Legend")
