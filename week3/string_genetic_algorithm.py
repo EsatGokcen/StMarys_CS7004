@@ -4,10 +4,11 @@ import string
 
 class StringGeneticAlgorithm:
 
-    def __init__(self, target: str = "hello", population_size: int = 10):
+    def __init__(self, target: str = "hello", population_size: int = 10, mutation_probability: int = 0.5):
         self.__target = target
         self.__population = []
         self.__population_size = population_size
+        self.__mutation_probability = mutation_probability
 
     def __initialise_population(self):
         for _ in range(self.__population_size):
@@ -36,6 +37,19 @@ class StringGeneticAlgorithm:
             offsprings.append(offspring)
         return offsprings
 
+    def __mutation(self, offsprings):
+        mutated_offsprings = []
+        for offspring in offsprings:
+            probability = random.random()
+            if probability < self.__mutation_probability:
+                random_letter = random.choice(string.ascii_lowercase)
+                random_index = random.randint(0, len(offspring)-1)
+                mutated_offspring = offspring[:random_index] + random_letter + offspring[random_index+1:]
+                mutated_offsprings.append(mutated_offspring)
+            else:
+                mutated_offsprings.append(offspring)
+        return mutated_offsprings
+
     def run(self):
         self.__initialise_population()
         fitness_scores = dict()
@@ -50,3 +64,5 @@ class StringGeneticAlgorithm:
         pairs = self.__selection(probabilities)
         offsprings = self.__cross_over(pairs)
         print(offsprings)
+        mutated_offsprings = self.__mutation(offsprings)
+        print(mutated_offsprings)
