@@ -75,3 +75,6 @@ class TemperatureFuzzySystem:
     def defuzzify(self, consequents):
         sorted_consequents = sorted(consequents.items(), key=lambda item: item[1])
         #return  the biggest value in sorted_consequents.keys()
+
+    def evaluate(self):
+        pass
