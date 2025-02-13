@@ -9,10 +9,11 @@ class StringGeneticAlgorithm:
         self.__population = []
         self.__population_size = population_size
 
-    def initialise_population(self):
+    def __initialise_population(self):
         for _ in range(self.__population_size):
             random_string = ''.join(random.choice(string.ascii_lowercase) for _ in range(len(self.__target)))
             self.__population.append(random_string)
+        print(self.__population)
 
-    def constructor(self):
-        pass
+    def run(self):
+        self.__initialise_population()
