@@ -15,5 +15,16 @@ class StringGeneticAlgorithm:
             self.__population.append(random_string)
         print(self.__population)
 
+    def __fitness(self, candidate: str):
+        score = 0
+        for index in range(len(self.__target)):
+            if self.__target[index] == candidate[index]:
+                score += 1
+        return score
+
     def run(self):
         self.__initialise_population()
+        fitness_scores = dict()
+        for candidate in self.__population:
+            fitness_scores.update({candidate: self.__fitness(candidate)})
+        print(fitness_scores)
