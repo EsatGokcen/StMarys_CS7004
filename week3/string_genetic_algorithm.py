@@ -22,9 +22,20 @@ class StringGeneticAlgorithm:
                 score += 1
         return score
 
+    def __selection(self, probabilities):
+        first_parents = random.choices(self.__population, weights=probabilities, k=self.__population_size)
+        second_parents = random.choices(self.__population, weights=probabilities, k=self.__population_size)
+        pairs = zip(first_parents, second_parents)
+        return pairs
+
     def run(self):
         self.__initialise_population()
         fitness_scores = dict()
         for candidate in self.__population:
             fitness_scores.update({candidate: self.__fitness(candidate)})
-        print(fitness_scores)
+
+        probabilities = []
+        for score in fitness_scores.values():
+            probabilities.append(score / len(self.__target))
+
+        self.__selection(probabilities)
