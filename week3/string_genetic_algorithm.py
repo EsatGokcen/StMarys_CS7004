@@ -4,7 +4,7 @@ import string
 
 class StringGeneticAlgorithm:
 
-    def __init__(self, target: str = "hello", population_size: int = 100):
+    def __init__(self, target: str = "hello", population_size: int = 10):
         self.__target = target
         self.__population = []
         self.__population_size = population_size
@@ -28,6 +28,14 @@ class StringGeneticAlgorithm:
         pairs = zip(first_parents, second_parents)
         return pairs
 
+    def __cross_over(self, pairs):
+        offsprings = []
+        for pair in pairs:
+            cross_over_point = len(self.__target) // 2
+            offspring = pair[0][:cross_over_point] + pair[1][cross_over_point:]
+            offsprings.append(offspring)
+        return offsprings
+
     def run(self):
         self.__initialise_population()
         fitness_scores = dict()
@@ -35,7 +43,10 @@ class StringGeneticAlgorithm:
             fitness_scores.update({candidate: self.__fitness(candidate)})
 
         probabilities = []
+        total_score = sum(fitness_scores.values())
         for score in fitness_scores.values():
-            probabilities.append(score / len(self.__target))
+            probabilities.append(score / total_score)
 
-        self.__selection(probabilities)
+        pairs = self.__selection(probabilities)
+        offsprings = self.__cross_over(pairs)
+        print(offsprings)
