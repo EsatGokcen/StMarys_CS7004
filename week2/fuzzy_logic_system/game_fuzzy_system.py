@@ -57,3 +57,20 @@ class FuzzyGame:
         # Defuzzification: Choose the final action
         return self.__defuzzify(inferred_actions)
 
+
+if __name__ == "__main__":
+    game = FuzzyGame()
+
+    # Test with different combinations of energy and proximity
+    test_cases = [
+        (10, 20),  # Low energy, Close proximity
+        (40, 50),  # Medium energy, Medium proximity
+        (80, 30),  # High energy, Close proximity
+        (25, 80),  # Low energy, Far proximity
+        (70, 90),  # Medium energy, Far proximity
+        (90, 20)  # High energy, Close proximity
+    ]
+
+    for energy, proximity in test_cases:
+        action = game.decide_action(energy, proximity)
+        print(f"Energy: {energy}, Proximity: {proximity} -> Action: {action}")
