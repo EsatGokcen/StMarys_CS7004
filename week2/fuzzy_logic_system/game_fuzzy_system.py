@@ -42,3 +42,18 @@ class FuzzyGame:
         )
         return {'attack': attack_degree, 'defend': defend_degree, 'run_away': run_away_degree}
 
+    def __defuzzify(self, inferred_actions):
+        # Defuzzification: Choose the action with the highest membership degree
+        return max(inferred_actions, key=inferred_actions.get)
+
+    def decide_action(self, energy, proximity):
+        # Fuzzification for energy and proximity
+        fuzzified_energy = self.__fuzzify(energy, self.energy_memberships)
+        fuzzified_proximity = self.__fuzzify(proximity, self.proximity_memberships)
+
+        # Inference: Apply rules to determine the action
+        inferred_actions = self.__infer(fuzzified_energy, fuzzified_proximity)
+
+        # Defuzzification: Choose the final action
+        return self.__defuzzify(inferred_actions)
+
