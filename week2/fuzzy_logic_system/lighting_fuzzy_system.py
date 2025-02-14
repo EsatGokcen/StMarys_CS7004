@@ -41,3 +41,18 @@ class SmartHomeLighting:
             for light, occupancy in self.rules['dim']
         )
         return {'brighten': brighten_degree, 'maintain': maintain_degree, 'dim': dim_degree}
+
+    def __defuzzify(self, inferred_actions):
+        # Defuzzification: Choose the action with the highest membership degree
+        return max(inferred_actions, key=inferred_actions.get)
+
+    def decide_action(self, ambient_light, occupancy):
+        # Fuzzification for ambient light and occupancy
+        fuzzified_light = self.__fuzzify(ambient_light, self.light_memberships)
+        fuzzified_occupancy = self.__fuzzify(occupancy, self.occupancy_memberships)
+
+        # Inference: Apply rules to determine the lighting action
+        inferred_actions = self.__infer(fuzzified_light, fuzzified_occupancy)
+
+        # Defuzzification: Choose the final action
+        return self.__defuzzify(inferred_actions)
