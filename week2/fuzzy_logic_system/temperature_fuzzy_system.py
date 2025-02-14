@@ -50,7 +50,7 @@ class TemperatureFuzzySystem:
         plt.legend()
         plt.show()
 
-    def fuzzify(self, current_temp):
+    def __fuzzify(self, current_temp):
         return {
             "very cold" : self.__memberships["very cold"](current_temp),
             "cold" : self.__memberships["cold"](current_temp),
@@ -59,7 +59,7 @@ class TemperatureFuzzySystem:
             "very hot" : self.__memberships["very hot"](current_temp)
         }
 
-    def infer(self, antecedents): # antecedents is basically the dictionary in fuzzify()
+    def __infer(self, antecedents): # antecedents is basically the dictionary in fuzzify()
         consequents = {
             "heat",
             "no change",
@@ -72,9 +72,15 @@ class TemperatureFuzzySystem:
 
         return consequents
 
-    def defuzzify(self, consequents):
-        sorted_consequents = sorted(consequents.items(), key=lambda item: item[1])
-        #return  the biggest value in sorted_consequents.keys()
+    def __defuzzify(self, consequent):
+        if consequent['heater_on'] > consequent['fan_on']:
+            return 'Heater On'
+        elif consequent['fan_on'] > consequent['heater_on']:
+            return 'Fan On'
+        else:
+            return 'Off'
 
-    def evaluate(self):
-        pass
+    def evaluate(self, temperature):
+        fuzzified_values = self.__fuzzify(temperature)
+        inference_result = self.__infer(fuzzified_values)
+        return self.__defuzzify(inference_result)
