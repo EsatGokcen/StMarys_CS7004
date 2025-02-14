@@ -56,3 +56,21 @@ class SmartHomeLighting:
 
         # Defuzzification: Choose the final action
         return self.__defuzzify(inferred_actions)
+
+
+if __name__ == "__main__":
+    smart_lighting = SmartHomeLighting()
+
+    # Test different combinations of ambient light and occupancy
+    test_cases = [
+        (10, 20),  # Low ambient light, Unoccupied
+        (50, 50),  # Medium ambient light, Partially occupied
+        (80, 80),  # High ambient light, Fully occupied
+        (20, 10),  # Low ambient light, Unoccupied
+        (30, 70),  # Low ambient light, Partially occupied
+        (70, 40)  # High ambient light, Partially occupied
+    ]
+
+    for ambient_light, occupancy in test_cases:
+        action = smart_lighting.decide_action(ambient_light, occupancy)
+        print(f"Ambient Light: {ambient_light} lux, Occupancy: {occupancy}% -> Action: {action}")
