@@ -8,9 +8,9 @@ class TicTacToe:
 
     def display_board(self):
         # display the board as a 3 by 3 grid
-        print(f"\n{self.__board[0], self.__board[1], self.__board[2]}")
-        print(f"\n{self.__board[3], self.__board[4], self.__board[5]}")
-        print(f"\n{self.__board[6], self.__board[7], self.__board[8]}")
+        print(f"\n{self.__board[0]}_|_{self.__board[1]}_|_{self.__board[2]}")
+        print(f"\n{self.__board[3]}_|_{self.__board[4]}_|_{self.__board[5]}")
+        print(f"\n{self.__board[6]}_|_{self.__board[7]}_|_{self.__board[8]}")
 
     def player_move(self):
         position = (int(input("Enter your move (1-9): ")) - 1)
