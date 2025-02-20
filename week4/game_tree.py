@@ -2,6 +2,7 @@ class TicTacToe:
 
     def __init__(self):
         self.__board = [' ' for _ in range(9)]
+        self.__running = True
 
     def display_board(self):
         # display the board as a 3 by 3 grid
@@ -12,11 +13,18 @@ class TicTacToe:
     def player_move(self):
         position = (int(input("Enter your move (1-9): ")) - 1)
         # if position invalid, ask again
-        self.__board[position] = 'X'
+        if self.__board[position] != ' ':
+            print("Position already occupied, please select again or press q to quit")
+            position = (int(input("Enter your move (1-9): ")) - 1)
+        elif position == 'q':
+            print("Thanks for playing, goodbye!")
+            self.__running = False
+        else:
+            self.__board[position] = 'X'
 
     def run(self):
         print("Welcome to Tic-Tac-Toe.\nYou are player X. I am player O.\n")
-        while True:
+        while self.__running:
             self.display_board()
             self.player_move()
 
