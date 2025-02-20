@@ -12,7 +12,7 @@ class TicTacToe:
         print(f"{self.__board[3]}_|_{self.__board[4]}_|_{self.__board[5]}")
         print(f"{self.__board[6]} | {self.__board[7]} | {self.__board[8]}")
 
-    def minimax(self, switch: bool):
+    def minimax(self, switch: bool) -> int:
         pass
 
     def player_move(self):
@@ -28,11 +28,16 @@ class TicTacToe:
             self.__board[position] = 'X'
 
     def computer_move(self):
+        best_score = float('inf') #set this to infinity
         for index in range(len(self.__board)):
             if self.__board[index] == " ":
                 self.__board[index] = 'O'
                 score = self.minimax(True)
                 self.__board[index] = ' '
+
+                if score < best_score:
+                    best_score = score
+                    best_move = index
 
     def game_over(self):
         if self.win():
