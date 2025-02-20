@@ -24,6 +24,21 @@ class TicTacToe:
         else:
             self.__board[position] = 'X'
 
+    def game_over(self):
+        pass
+
+    def win(self):
+        conditions = [0,1,2], [0,3,6], [0,4,8], [3,4,5], [1,4,7], [2,4,6], [6,7,8], [2,5,8]
+        for condition in conditions:
+            for i in condition:
+                if self.__board[i] == 'X' or 'O':
+                    return True
+        else:
+            return False
+
+    def draw(self):
+        pass
+
     def run(self):
         print("\n\nWelcome to Tic-Tac-Toe.\nYou are player X. I am player O.\n")
         while self.__running:
