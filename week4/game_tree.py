@@ -4,8 +4,10 @@ class TicTacToe:
         self.__board = [' ' for _ in range(9)]
 
     def display_board(self):
-        pass
-        #display the board as a 3 by 3 grid
+        # display the board as a 3 by 3 grid
+        print(f"\n{self.__board[0][1][2]}")
+        print(f"\n{self.__board[3][4][5]}")
+        print(f"\n{self.__board[6][7][8]}")
 
     def player_move(self):
         position = (int(input("Enter your move (1-9): ")) - 1)
