@@ -66,15 +66,18 @@ class TicTacToe:
         if best_move is not None:
             self.__board[best_move] = 'O'
 
-    def game_over(self):
-        if self.win():
-            print("YOU WON!")
-            self.__running = False
-        elif self.draw():
-            print("ITS A DRAW...")
-            self.__running = False
-        else:
-            pass
+    def game_over(self, player):
+        if self.win(player):
+            self.display_board()
+            print(f"{'You' if player == 'X' else 'I'} win!")
+            return True
+
+        if self.draw():
+            self.display_board()
+            print("It's a draw!")
+            return True
+
+        return False
 
 
     def win(self, player: str):
