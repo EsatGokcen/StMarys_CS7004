@@ -19,6 +19,24 @@ class TicTacToe:
         if self.draw(): return 0
 
         # Recursive Case
+        if is_max:  # Human (X) is maximising
+            best_score = float('-inf')
+            for i in range(9):
+                if self.__board[i] == ' ':
+                    self.__board[i] = 'X'
+                    score = self.minimax(False)
+                    self.__board[i] = ' '
+                    best_score = max(score, best_score)
+            return best_score
+        else:  # Computer (O) is minimising
+            best_score = float('inf')
+            for i in range(9):
+                if self.__board[i] == ' ':
+                    self.__board[i] = 'O'
+                    score = self.minimax(True)
+                    self.__board[i] = ' '
+                    best_score = min(score, best_score)
+            return best_score
 
     def player_move(self):
         position = (int(input("Enter your move (1-9): ")) - 1)
