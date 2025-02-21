@@ -4,7 +4,6 @@ class TicTacToe:
         self.__board = []
         for _ in range(9):
             self.__board.append(' ')
-        self.__running = True
 
     def display_board(self):
         # display the board as a 3 by 3 grid
@@ -92,10 +91,12 @@ class TicTacToe:
 
     def run(self):
         print("\n\nWelcome to Tic-Tac-Toe.\nYou are player X. I am player O.\n")
-        while self.__running:
+        while True:
             self.display_board()
             self.player_move()
+            if self.game_over('X'): break
             self.computer_move()
+            if self.game_over('O'): break
 
 if __name__ == '__main__':
     game = TicTacToe()
