@@ -79,7 +79,6 @@ class TicTacToe:
 
         return False
 
-
     def win(self, player: str):
         win_conditions = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8],  # Rows
@@ -89,7 +88,7 @@ class TicTacToe:
         return any(all(self.__board[cell] == player for cell in condition) for condition in win_conditions)
 
     def draw(self):
-        pass
+        return ' ' not in self.__board
 
     def run(self):
         print("\n\nWelcome to Tic-Tac-Toe.\nYou are player X. I am player O.\n")
