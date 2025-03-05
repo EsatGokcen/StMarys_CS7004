@@ -53,3 +53,15 @@ class Location:
             new_y (int): The new y-coordinate.
         """
         self.__y = new_y
+
+    def equals(self, other_location: 'Location') -> bool:
+        """
+        Checks if two locations are equal.
+
+        Args:
+            other_location (Location): The other location to compare.
+
+        Returns:
+            bool: True if the locations are equal, False otherwise.
+        """
+        return self.__x == other_location.get_x() and self.__y == other_location.get_y()
