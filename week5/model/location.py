@@ -17,3 +17,39 @@ class Location:
         """
         self.__x = x
         self.__y = y
+
+    def get_x(self) -> int:
+        """
+        Gets the x-coordinate of the location.
+
+        Returns:
+            int: The x-coordinate.
+        """
+        return self.__x
+
+    def get_y(self) -> int:
+        """
+        Gets the y-coordinate of the location.
+
+        Returns:
+            int: The y-coordinate.
+        """
+        return self.__y
+
+    def set_x(self, new_x: int) -> None:
+        """
+        Sets the x-coordinate of the location.
+
+        Args:
+            new_x (int): The new x-coordinate.
+        """
+        self.__x = new_x
+
+    def set_y(self, new_y: int) -> None:
+        """
+        Sets the y-coordinate of the location.
+
+        Args:
+            new_y (int): The new y-coordinate.
+        """
+        self.__y = new_y
