@@ -49,3 +49,21 @@ class Environment(ABC):
             location (Location): The location to set the agent.
         """
         pass
+
+    def get_width(self) -> int:
+        """
+        Returns the width of the environment grid.
+
+        Returns:
+            int: The width of the environment grid.
+        """
+        return self.__width
+
+    def get_height(self) -> int:
+        """
+        Returns the height of the environment grid.
+
+        Returns:
+            int: The height of the environment grid.
+        """
+        return self.__height
