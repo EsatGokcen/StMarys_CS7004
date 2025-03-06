@@ -45,3 +45,31 @@ class Ocean(Environment):
             location (Location): The location to set the agent.
         """
         self.__grid[location.get_y()][location.get_x()] = agent
+
+    def find_free_locations(self, location: Location) -> List[Location]:
+        x = location.get_x()
+        y = location.get_y()
+
+        free_locations = []
+
+        for offset_y in range(-1, 2):
+            for offset_x in range(-1, 2):
+                loc_x = x + offset_x
+                loc_y = y + offset_y
+
+                if loc_x < 0:
+                    loc_x = self.get_width() - 1
+
+                if loc_y < 0:
+                    loc_y = self.get_height() - 1
+
+                if loc_x >= self.get_width():
+                    loc_x = 0
+
+                if loc_y >= self.get_height():
+                    loc_y = 0
+
+                if self.__grid[loc_y][loc_x] is None:
+                    free_locations.append(Location(loc_x, loc_y))
+
+        return free_locations
