@@ -1,7 +1,8 @@
+from abc import ABC, abstractmethod
 from week5.model.location import Location
 
 
-class Agent:
+class Agent(ABC):
     def __init__(self, location: Location) -> None:
         """
         Constructor for the Agent class.
@@ -28,3 +29,10 @@ class Agent:
         A Location object representing the agent's current location.
         """
         return self.__location
+
+    @abstractmethod
+    def act(self):
+        """
+        The agent performs some actions.
+        """
+        pass
