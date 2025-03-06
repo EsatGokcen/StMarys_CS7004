@@ -18,3 +18,34 @@ class Environment(ABC):
         """
         self.__width = width
         self.__height = height
+
+    @abstractmethod
+    def clear(self) -> None:
+        """
+        Clears the environment by removing all agents.
+        """
+        pass
+
+    @abstractmethod
+    def get_agent(self, location: Location) -> Agent:
+        """
+        Returns the agent at location in the environment grid.
+
+        Args:
+            location (Location): The location of the agent.
+
+        Returns:
+            Agent: The agent at the location.
+        """
+        pass
+
+    @abstractmethod
+    def set_agent(self, agent: Agent, location: Location) -> None:
+        """
+        Sets the agent at position (x, y) in the environment grid.
+
+        Args:
+            agent (Agent): The agent to set.
+            location (Location): The location to set the agent.
+        """
+        pass
