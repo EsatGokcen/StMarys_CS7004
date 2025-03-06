@@ -19,3 +19,29 @@ class Ocean(Environment):
         """
         super().__init__(width, height)
         self.__grid = [[None for _ in range(width)] for _ in range(height)]
+
+    def clear(self):
+        """Clears the ocean by removing all agents."""
+        self.__grid = [[None for _ in range(self.get_width())] for _ in range(self.get_height())]
+
+    def get_agent(self, location: Location):
+        """
+        Returns the agent at location in the ocean.
+
+        Args:
+            location (Location): The location of the agent.
+
+        Returns:
+            Agent: The agent at location in the ocean.
+        """
+        return self.__grid[location.get_y()][location.get_x()]
+
+    def set_agent(self, agent: Agent, location: Location):
+        """
+        Sets the agent at position in the ocean.
+
+        Args:
+            agent (Agent): The agent to set.
+            location (Location): The location to set the agent.
+        """
+        self.__grid[location.get_y()][location.get_x()] = agent
