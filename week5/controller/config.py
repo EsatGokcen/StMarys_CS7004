@@ -3,3 +3,8 @@
 # ocean size (number of rows/columns in a symmetrical grid),
 # colours (string values e.g. "red") for each agent.
 # breeding probability (floats between 0 and 1) for each agent.
+
+class Config:
+
+    def __init__(self):
+        pass
