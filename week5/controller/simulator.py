@@ -39,3 +39,11 @@ class Simulator:
             time.sleep(1)
             if self.__gui.is_closed():
                 self.__is_running = False
+
+    def __render(self) -> None:
+        """Render the current state of the simulation."""
+        # TODO: Render the Gui by invoking the appropriate method
+
+    def __update(self) -> None:
+        """Update the simulation state."""
+        # TODO: Invoke the act method for each agent
