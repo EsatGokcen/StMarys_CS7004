@@ -79,3 +79,32 @@ class Gui(tk.Tk):
         self.grid_frame.grid(row=1, column=0)
 
         # TODO: Redraw the grid
+
+    def update_legend(self):
+        """Update the legend panel with agent counts."""
+        agent_counts = {}
+
+        # Iterate over all cells in the environment grid
+        for row_index in range(self.__environment.get_height()):
+            for col_index in range(self.__environment.get_width()):
+                agent = self.__environment.get_agent(Location(col_index, row_index))
+
+                # Count the occurrences of each type of agent
+                if agent:
+                    agent_class = agent.__class__
+                    agent_counts[agent_class] = agent_counts.get(agent_class, 0) + 1
+
+        # Clear the legend panel
+        for widget in self.legend_panel.winfo_children():
+            widget.destroy()
+
+        # Update the legend panel with agent counts
+        sorted_counts = sorted(agent_counts.items(), key=lambda x: x[0].__name__)
+
+        for agent_class, count in sorted_counts:
+            color_label = tk.Label(self.legend_panel, bg=self.__agent_colours[agent_class], width=2, height=1)
+            color_label.pack(side=tk.LEFT)
+
+            label_text = agent_class.__name__ + " (" + str(count) + ")"
+            label = tk.Label(self.legend_panel, text=label_text)
+            label.pack(side=tk.LEFT)
