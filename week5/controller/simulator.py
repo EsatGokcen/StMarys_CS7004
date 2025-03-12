@@ -15,11 +15,17 @@ class Simulator:
         """
         self.__ocean = Ocean()
         self.__agents = []
+        self.__agent_colours = {
+            "shark": "red",
+            "sardine": "blue",
+            "plankton": "green"
+        }
         self.__generate_initial_population()
         self.__is_running = False
 
         # TODO: Define a dictionary, agent_colours, containing colours for each agent (class name - colour string pairs)
         # TODO: Initialise a new Gui object
+        self.__gui = Gui(self.__ocean, self.__agent_colours)
         # TODO: Render the Gui by invoking the appropriate method
 
     def __generate_initial_population(self) -> None:
