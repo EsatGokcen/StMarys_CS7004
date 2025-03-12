@@ -39,3 +39,26 @@ class Gui(tk.Tk):
         self.__init_gui()
         self.__init_info()
         self.__init_world()
+
+    def render(self):
+        """Render the current state of the environment."""
+        self.update_legend()
+
+        for widget in self.grid_frame.winfo_children():
+            widget.destroy()
+
+        for row_index in range(self.__environment.get_height()):
+            row = []
+            for col_index in range(self.__environment.get_width()):
+                agent = self.__environment.get_agent(Location(col_index, row_index))
+
+                # TODO: Set the current agent colour
+
+                # TODO: Create a new Canvas object with appropriate attributes (width, height, background colour, border width, relief set to "solid")
+
+                # TODO: Add the cell to the grid
+
+                # TODO: Add the cell to the row
+
+        self.update()
+        self.update_idletasks()
