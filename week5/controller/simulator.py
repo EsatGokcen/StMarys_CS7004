@@ -21,3 +21,10 @@ class Simulator:
         # TODO: Define a dictionary, agent_colours, containing colours for each agent (class name - colour string pairs)
         # TODO: Initialise a new Gui object
         # TODO: Render the Gui by invoking the appropriate method
+
+    def __generate_initial_population(self) -> None:
+        """
+        Generate the initial population of agents.
+        """
+        # TODO: Generate the initial population
+        pass
