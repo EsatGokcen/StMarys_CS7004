@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from week5.model.location import Location
+from week5.model.ocean import Ocean
 
 
 class Agent(ABC):
@@ -31,7 +32,7 @@ class Agent(ABC):
         return self.__location
 
     @abstractmethod
-    def act(self):
+    def act(self, ocean: Ocean):
         """
         The agent performs some actions.
         """
