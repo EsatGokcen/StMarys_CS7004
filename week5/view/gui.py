@@ -108,3 +108,13 @@ class Gui(tk.Tk):
             label_text = agent_class.__name__ + " (" + str(count) + ")"
             label = tk.Label(self.legend_panel, text=label_text)
             label.pack(side=tk.LEFT)
+
+    def on_closing(self):
+        """Handle closing of the GUI window."""
+        if messagebox.askokcancel("Quit", "Do you want to quit?"):
+            self.__closed = True
+            self.destroy()
+
+    def is_closed(self) -> bool:
+        """Check if the GUI window is closed."""
+        return self.__closed
