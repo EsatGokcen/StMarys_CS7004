@@ -62,3 +62,20 @@ class Gui(tk.Tk):
 
         self.update()
         self.update_idletasks()
+
+    def __init_gui(self):
+        """Initialise GUI settings."""
+        self.title(Config.simulation_name)
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
+
+    def __init_info(self):
+        """Initialise the legend panel."""
+        self.legend_panel = tk.Frame(self)
+        self.legend_panel.grid(row=0, column=0)
+
+    def __init_world(self):
+        """Initialise the world grid."""
+        self.grid_frame = tk.Frame(self)
+        self.grid_frame.grid(row=1, column=0)
+
+        # TODO: Redraw the grid
