@@ -28,3 +28,14 @@ class Simulator:
         """
         # TODO: Generate the initial population
         pass
+
+    def run(self) -> None:
+        """Run the simulation."""
+        self.__is_running = True
+
+        while self.__is_running:
+            self.__update()
+            self.__render()
+            time.sleep(1)
+            if self.__gui.is_closed():
+                self.__is_running = False
