@@ -14,13 +14,17 @@ class Particle:
         self.__velocity = 0
         self.__p_best_position = copy.deepcopy(self.__position)
 
-    def objective_function(self):
-        pass
-        # a callback function
+    def get_dimensions(self) -> int:
+        return self.__dimensions
 
-    def p_best_position(self) -> list[float]:
-        pass
-        # particles personal best position
+    def get_bounds(self) -> list[tuple[int, int]]:
+        return self.__bounds
 
-    def p_best_value(self) -> float:
-        pass
+    def get_position(self) -> list[int]:
+        return self.__position
+
+    def get_velocity(self) -> int:
+        return self.__velocity
+
+    def get_p_best_position(self) -> list[int]:
+        return self.__p_best_position
