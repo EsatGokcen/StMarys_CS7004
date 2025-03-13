@@ -6,14 +6,19 @@
         self.velocity = velocity
         self.objective_function()
 """
+import random
 
 class Particle:
 
-    def __init__(self, objective_function, bounds_for_dimensions: list[tuple[str, int, int]] = [["x", 0, 4], ["y", 0, 4]], initial_position: list[float] = [0.0, 0.0]):
-        self.dimensions = bounds_for_dimensions[0][0], bounds_for_dimensions[1][0]
-        self.bounds = bounds_for_dimensions[0][1], bounds_for_dimensions[0][2], bounds_for_dimensions[1][1], bounds_for_dimensions[1][2]
+    def __init__(self, bounds: list[tuple[int, int]], objective_function, initial_position: list[float] = None):
+        self.dimensions = len(bounds)
+        self.bounds = bounds
         self.objective_function = objective_function
-        self.position = initial_position
+        if initial_position:
+            self.position = initial_position
+        else:
+            self.position = [random.randint(bound[0], bound[1]) for bound in self.bounds]
+        self.velocity = 0
 
 
     def objective_function(self):
