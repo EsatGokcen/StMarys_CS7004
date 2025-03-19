@@ -1,7 +1,7 @@
 import time
 
-from week5.view.gui import Gui
-from week5.model.ocean import Ocean
+from week5and6.view.gui import Gui
+from week5and6.model.ocean import Ocean
 
 
 class Simulator:

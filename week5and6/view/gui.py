@@ -4,11 +4,11 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from typing import TYPE_CHECKING
 
-from week5.controller.config import Config
-from week5.model.location import Location
+from week5and6.controller.config import Config
+from week5and6.model.location import Location
 
 if TYPE_CHECKING:
-    from week5.model.environment import Environment
+    from week5and6.model.environment import Environment
 
 
 class Gui(tk.Tk):
