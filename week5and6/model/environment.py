@@ -4,26 +4,13 @@ from week5and6.model.location import Location
 
 
 class Environment(ABC):
-    """
-    Abstract base class representing an environment.
-    """
 
     def __init__(self, width: int, height: int) -> None:
-        """
-        Initialises an Environment object with the given width and height.
-
-        Args:
-            width (int): The width of the environment grid.
-            height (int): The height of the environment grid.
-        """
         self.__width = width
         self.__height = height
 
     @abstractmethod
     def clear(self) -> None:
-        """
-        Clears the environment by removing all agents.
-        """
         pass
 
     @abstractmethod
