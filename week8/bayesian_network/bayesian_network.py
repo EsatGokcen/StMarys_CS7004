@@ -6,7 +6,7 @@ class BayesianNetwork:
         self.__nodes = {}
 
     @property
-    def nodes(self) -> dict[Node]:
+    def nodes(self) -> dict:
         return self.__nodes
 
     def add_node(self, node: Node) -> None:
