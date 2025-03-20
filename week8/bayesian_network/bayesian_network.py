@@ -20,3 +20,11 @@ class BayesianNetwork:
 
     def remove_edge(self, parent_node: Node, child_node: Node) -> None:
         child_node.remove_parent(parent_node)
+
+    def prob_given_evidence(self, node_name: str, value, evidence):
+        node = self.__nodes.get(node_name)
+        if len(node.parents) > 0:
+            for parent in node.parents:
+                parent.evidence()
+        else:
+            return node.cpt(value)
