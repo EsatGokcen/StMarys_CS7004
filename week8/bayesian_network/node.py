@@ -8,15 +8,15 @@ class Node:
         self.__cpt = {}
 
     @property
-    def get_name(self) -> str:
+    def name(self) -> str:
         return self.__name
 
     @property
-    def get_parents(self) -> list[Self]:
+    def parents(self) -> list[Self]:
         return self.__parents
 
     @property
-    def get_cpt(self) -> dict[bool | float]:
+    def cpt(self) -> dict[tuple[bool] | float]:
         return self.__cpt
 
     def add_parent(self, parent_node: Self) -> None:

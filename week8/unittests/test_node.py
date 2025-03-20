@@ -8,4 +8,4 @@ class TestNode(unittest.TestCase):
         parent_node = Node("parent node")
         child_node.add_parent(parent_node)
 
-        TestNode.assertEqual(self, child_node.get_parents()[0], parent_node, "Parent node not in child node as expected.")
+        TestNode.assertEqual(self, child_node.parents[0], parent_node, "Parent node not in child node as expected.")

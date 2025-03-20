@@ -6,11 +6,11 @@ class BayesianNetwork:
         self.__nodes = {}
 
     @property
-    def get_nodes(self) -> dict[Node]:
+    def nodes(self) -> dict[Node]:
         return self.__nodes
 
     def add_node(self, node: Node) -> None:
-        self.__nodes.update({node.get_name(), node})
+        self.__nodes.update({node.name, node})
 
     def remove_node(self, node_name: str) -> None:
         del self.__nodes[node_name]
