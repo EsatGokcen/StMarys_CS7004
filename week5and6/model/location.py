@@ -36,10 +36,4 @@ class Location:
         return self.__x == other_location.get_x() and self.__y == other_location.get_y()
 
     def __str__(self) -> str:
-        """
-        Returns a string representation of the location.
-
-        Returns:
-            str: A string representation of the location.
-        """
         return f"({self.__x}, {self.__y})"
