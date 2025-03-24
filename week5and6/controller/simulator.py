@@ -53,3 +53,5 @@ class Simulator:
     def __update(self) -> None:
         """Update the simulation state."""
         # TODO: Invoke the act method for each agent
+        for agent in self.__agents:
+            agent.act()
