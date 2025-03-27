@@ -5,11 +5,12 @@ import matplotlib.pyplot as plt
 G = nx.DiGraph()
 
 # Add nodes
-nodes = ["Alice", "Bob", "Charlie"]
+nodes = ["Ananya", "Raj", "Yuki", "Kai", "Aisha", "Luca"]
 G.add_nodes_from(nodes)
 
 # Add edges
-edges = [("Alice", "Bob"), ("Bob", "Charlie"), ("Charlie", "Alice")]
+edges = [("Ananya", "Raj"), ("Ananya", "Yuki"), ("Raj", "Yuki"), ("Yuki", "Ananya"), ("Yuki", "Kai"),
+         ("Kai", "Aisha"), ("Aisha", "Luca"), ("Luca", "Raj"), ("Luca", "Ananya")]
 G.add_edges_from(edges)
 
 # Compute the layout for the nodes
