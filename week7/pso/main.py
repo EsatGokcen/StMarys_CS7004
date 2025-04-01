@@ -20,7 +20,7 @@ def run():
     inertia_weight = 0.7
     cognitive_coefficient = 1.5
     social_coefficient = 1.5
-    max_iterations = 1000
+    max_iterations = 100
 
     # Create the swarm and visualiser
     swarm = Swarm(num_hunters, bounds, treasure_map)
