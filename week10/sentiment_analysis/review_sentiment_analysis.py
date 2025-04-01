@@ -5,6 +5,8 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 
 # Download the relevant models
 nltk.download('punkt')
@@ -28,7 +30,7 @@ def pre_process_review(text):
 
 
 # Define a function to calculate the Bag of Words matrix
-def calculate_bow_matrix(pre_processed_reviews, labels):
+def calculate_bow_matrix(pre_processed_reviews, labels, vectorizer):
     # Separate reviews by sentiment labels
     positive_reviews = pre_processed_reviews[labels == 'positive']
     negative_reviews = pre_processed_reviews[labels == 'negative']
@@ -38,6 +40,40 @@ def calculate_bow_matrix(pre_processed_reviews, labels):
     negative_bow_matrix = vectorizer.transform(negative_reviews)
 
     return positive_bow_matrix, negative_bow_matrix
+
+
+# Define a function to predict sentiment
+def predict_sentiment(new_reviews, positive_bow_matrix, negative_bow_matrix, vectorizer):
+    # Pre-process and transform the new reviews
+    pre_processed_new_reviews = [pre_process_review(review) for review in new_reviews]
+    new_reviews_bow_matrix = vectorizer.transform(pre_processed_new_reviews)
+
+    # Compute cosine similarity between new reviews and the BoW matrices
+    positive_similarity = cosine_similarity(new_reviews_bow_matrix, positive_bow_matrix)
+    negative_similarity = cosine_similarity(new_reviews_bow_matrix, negative_bow_matrix)
+
+    # Predict sentiment based on higher similarity
+    predictions = []
+    for i in range(len(new_reviews)):
+        if positive_similarity[i].mean() > negative_similarity[i].mean():
+            predictions.append('positive')
+        elif positive_similarity[i].mean() < negative_similarity[i].mean():
+            predictions.append('negative')
+        else:
+            predictions.append('neutral')
+
+    return predictions
+
+
+# Define a function to evaluate the model's performance
+def evaluate(actual_labels, predictions):
+    accuracy = accuracy_score(actual_labels, predictions)
+    precision = precision_score(actual_labels, predictions, average='macro')
+    recall = recall_score(actual_labels, predictions, average='macro')
+    f1 = f1_score(actual_labels, predictions, average='macro')
+    conf_matrix = confusion_matrix(actual_labels, predictions, labels=['positive', 'neutral', 'negative'])
+
+    return accuracy, precision, recall
 
 
 if __name__ == '__main__':
@@ -54,7 +90,8 @@ if __name__ == '__main__':
     pre_processed_reviews = df['review'].apply(lambda x: pre_process_review(x))
 
     # Display processed data
-    print(f"Pre-Processed Reviews:\n{pre_processed_reviews}\n")
+    print("Pre-Processed Reviews:")
+    print(pre_processed_reviews)
 
     # Retrieve the 'sentiment' column with 'positive' or 'negative' labels
     labels = df['sentiment']
@@ -63,8 +100,36 @@ if __name__ == '__main__':
     vectorizer = CountVectorizer()
 
     # Calculate the BoW matrices
-    positive_bow_matrix, negative_bow_matrix = calculate_bow_matrix(pre_processed_reviews, labels)
+    positive_bow_matrix, negative_bow_matrix = calculate_bow_matrix(pre_processed_reviews, labels, vectorizer)
 
     # Display the matrices
-    print(f"Positive BoW Matrix:\n{positive_bow_matrix}\n")
-    print(f"Negative BoW Matrix:\n{negative_bow_matrix}\n")
+    print("Positive BoW Matrix:")
+    print(positive_bow_matrix.toarray())
+    print("Negative BoW Matrix:")
+    print(negative_bow_matrix.toarray())
+
+    # Load new reviews
+    new_reviews = pd.read_csv('new_reviews.csv')
+
+    # Predict the sentiment of the new reviews
+    predictions = predict_sentiment(new_reviews['review'], positive_bow_matrix, negative_bow_matrix, vectorizer)
+
+    # Display the predictions
+    print("Predictions:")
+    print("_" * len('Predictions'))
+
+    for review, sentiment in zip(new_reviews['review'], predictions):
+        print("Review:", review)
+        print("Predicted Sentiment:", sentiment)
+        print()
+
+    # Evaluate the performance of the sentiment analyzer
+    actual_labels = new_reviews['sentiment'].tolist()
+    accuracy, precision, recall, f1, conf_matrix = evaluate(actual_labels, predictions)
+
+    # Display the evaluation metrics
+    print(f"Accuracy: {accuracy:.2f}")
+    print(f"Precision: {precision:.2f}")
+    print(f"Recall: {recall:.2f}")
+    print(f"F1 Score: {f1:.2f}")
+    print(f"Confusion Matrix: {conf_matrix:.2f}")
